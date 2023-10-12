@@ -1,0 +1,50 @@
+# baixar o python no computador e a extensão python no vscode
+
+# A função euler(f, x0, y0, h, n) é definida para realizar a aproximação numérica usando o Método de Euler. Ela aceita os seguintes parâmetros:
+
+# f: A função que define a EDO, ou seja, dy/dx = f(x, y).
+ x0: O valor inicial de x.
+ y0: O valor inicial de y.
+ h: O tamanho do passo.
+ n: O número de passos a serem executados.
+ 
+# A função entra em um loop for que percorre os valores de k de 0 a n-1. Cada iteração do loop representa um passo no Método de Euler.
+
+# Dentro do loop, o Método de Euler é aplicado com as seguintes etapas:
+  y0 += h * f(x0, y0): O novo valor de y é calculado usando a fórmula do Método de Euler, onde h é o tamanho do passo, f(x0, y0) é a derivada da função f em relação a x no ponto atual.
+  x0 += h: O valor de x é incrementado pelo tamanho do passo.
+ 
+# Após cada iteração do loop, os valores aproximados de x e y para o passo atual são impressos no terminal usando a função print. Os resultados são exibidos no formato x_k+1 (valor de x no próximo passo) e y_k+1 (valor de y no próximo passo).
+
+# No bloco if __name__ == '__main__':, a função f(x, y) é definida. Neste caso, a função f é f(x, y) = x + y, mas você pode substituir essa função pela EDO que deseja resolver.
+
+# Em seguida, são definidos os valores iniciais x0, y0, o tamanho do passo h e o número de passos n.
+
+# Finalmente, a função euler é chamada com os parâmetros fornecidos, resolvendo a EDO usando o Método de Euler para os valores iniciais dados e exibindo os resultados no terminal. O resultado é uma aproximação da solução da EDO no intervalo especificado.
+
+# escrever no terminal "python euler.py"
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# para baixar mtplotli e o numb basta escrever "pip install matplotlib" no powershell do vs code
+
+# A função euler(f, x0, y0, h, n) é definida para resolver uma equação diferencial usando o Método de Euler. Ela aceita a função f(x, y) que define a equação diferencial, o valor inicial x0, o valor inicial y0, o tamanho do passo h, e o número de passos n. A função calcula a aproximação da solução e retorna duas listas xs e ys que representam os valores de x e y em cada passo.
+
+# No bloco if __name__ == '__main__':, a função f(x, y) é definida, que é a função diferencial que será resolvida. Neste caso, a função é f(x, y) = x + y.
+
+# Os valores iniciais x0, y0, o tamanho do passo h e o número de passos n são definidos.
+
+# A função euler é chamada com os parâmetros fornecidos, e os resultados são armazenados nas listas xs e ys.
+
+# O código importa a biblioteca matplotlib.pyplot como plt para criar gráficos e a biblioteca numpy como np para trabalhar com matrizes e vetores.
+
+# A função y(x) é definida para calcular a solução exata da equação diferencial. Neste caso, a função exata é y(x) = 2 * exp(x) - x - 1.
+
+# É criada uma matriz t usando np.linspace para gerar um conjunto de valores x ao longo do intervalo de x0 a x0 + n * h, que será usado para traçar a solução exata.
+
+# A matriz yt é calculada, que contém os valores correspondentes de y para cada valor de t usando a função exata.
+
+# O código cria um gráfico da solução exata usando plt.plot(t, yt). Isso cria uma curva suave representando a solução exata.
+
+# O código traça os pontos calculados pelo Método de Euler usando plt.scatter(xs, ys). Isso adiciona pontos ao gráfico que representam a aproximação numérica.
+
+# Por fim, o gráfico é salvo em um arquivo chamado "euler.png" usando plt.savefig("euler.png").
