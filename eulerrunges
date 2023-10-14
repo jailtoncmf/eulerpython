@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 def f1(x,y):
   return (1 - y/x)
 
@@ -71,6 +73,7 @@ x0 = 2
 y0 = 2
 xf = 2.1
 h = 0.1
+
 x1,y1 = runge1(f,x0,xf,y0,h)
 print("Runge 1: y[",x1,"] = ",y1)
 x1,y1 = runge2(f,x0,xf,y0,h)
@@ -80,14 +83,66 @@ print("Runge 3: y[",x1,"] = ",y1)
 x1, y1 = runge4(f, x0, xf, y0, h)
 print("Runge 4: y[", x1, "] =", y1)
 
-plt.figure(figsize=(10, 6))
-plt.plot([x0, x1], [y0, y1], label="Runge 1")
-plt.plot([x0, x2], [y0, y2], label="Runge 2")
-plt.plot([x0, x3], [y0, y3], label="Runge 3")
-plt.plot([x0, x4], [y0, y4], label="Runge 4")
-plt.xlabel("x")
-plt.ylabel("y")
-plt.legend()
-plt.grid()
 
-plt.savefig("runge_methods.png")
+x_values = [x0]
+y1_values = [y0]
+y2_values = [y0]
+y3_values = [y0]
+y4_values = [y0]
+
+n = int((xf - x0) / h)
+for i in range(n):
+    x0, y0 = runge1(f, x0, xf, y0, h)
+    x_values.append(x0)
+    y1_values.append(y0)
+
+x0 = 2  
+for i in range(n):
+    x0, y0 = runge2(f, x0, xf, y0, h)
+    y2_values.append(y0)
+
+x0 = 2  
+for i in range(n):
+    x0, y0 = runge3(f, x0, xf, y0, h)
+    y3_values.append(y0)
+
+x0 = 2  
+for i in range(n):
+    x0, y0 = runge4(f, x0, xf, y0, h)
+    y4_values.append(y0)
+
+plt.figure(figsize=(10, 6))
+plt.plot(x_values, y1_values, label='Runge-Kutta 1', marker='o', linestyle='-', color='b')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Runge-Kutta 1 Method')
+plt.legend()
+plt.savefig('runge1_plot.png')
+plt.show()
+
+plt.figure(figsize=(10, 6))
+plt.plot(x_values, y2_values, label='Runge-Kutta 2', marker='o', linestyle='-', color='g')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Runge-Kutta 2 Method')
+plt.legend()
+plt.savefig('runge2_plot.png')
+plt.show()
+
+plt.figure(figsize=(10, 6))
+plt.plot(x_values, y3_values, label='Runge-Kutta 3', marker='o', linestyle='-', color='r')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Runge-Kutta 3 Method')
+plt.legend()
+plt.savefig('runge3_plot.png')
+plt.show()
+
+plt.figure(figsize=(10, 6))
+plt.plot(x_values, y4_values, label='Runge-Kutta 4', marker='o', linestyle='-', color='y')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Runge-Kutta 4 Method')
+plt.legend()
+plt.savefig('runge4_plot.png')
+plt.show()
