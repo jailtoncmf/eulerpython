@@ -1,0 +1,70 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+
+
+p0 = 2886695  
+k = 0.0027  
+
+def p(t, p):
+    return p * math.exp(k * t)
+
+
+def runge_kutta_1(f, p0, t, h):
+    k1 = f(t, p0)
+    return p0 + h * k1
+
+def runge_kutta_2(f, p0, t, h):
+    k1 = f(t, p0)
+    k2 = f(t + h, p0 + h * k1)
+    return p0 + h * (k1 + k2) / 2
+
+def runge_kutta_3(f, p0, t, h):
+    k1 = f(t, p0)
+    k2 = f(t + h/2, p0 + h/2 * k1)
+    k3 = f(t + h, p0 - h * k1 + 2 * h * k2)
+    return p0 + h * (k1 + 4 * k2 + k3) / 6
+
+def runge_kutta_4(f, p0, t, h):
+    k1 = f(t, p0)
+    k2 = f(t + h/2, p0 + h/2 * k1)
+    k3 = f(t + h/2, p0 + h/2 * k2)
+    k4 = f(t + h, p0 + h * k3)
+    return p0 + h * (k1 + 2*k2 + 2*k3 + k4) / 6
+
+t0 = 0  
+tf = 10  
+h = 1  
+
+time_points = np.arange(t0, tf + h, h)
+populations_1 = [p0]
+populations_2 = [p0]
+populations_3 = [p0]
+populations_4 = [p0]
+
+for t in time_points[:-1]:
+    populations_1.append(runge_kutta_1(p, populations_1[-1], t, h))
+    populations_2.append(runge_kutta_2(p, populations_2[-1], t, h))
+    populations_3.append(runge_kutta_3(p, populations_3[-1], t, h))
+    populations_4.append(runge_kutta_4(p, populations_4[-1], t, h))
+
+for i, t in enumerate(time_points):
+    print(f"Ano {t}:")
+    print(f"Runge-Kutta 1: População = {int(populations_1[i])}")
+    print(f"Runge-Kutta 2: População = {int(populations_2[i])}")
+    print(f"Runge-Kutta 3: População = {int(populations_3[i])}")
+    print(f"Runge-Kutta 4: População = {int(populations_4[i])}")
+    print("")
+
+plt.figure(figsize=(10, 6))
+plt.plot(time_points, populations_1, label='Runge-Kutta 1', marker='o')
+plt.plot(time_points, populations_2, label='Runge-Kutta 2', marker='s')
+plt.plot(time_points, populations_3, label='Runge-Kutta 3', marker='x')
+plt.plot(time_points, populations_4, label='Runge-Kutta 4', marker='^')
+plt.xlabel('Anos')
+plt.ylabel('População')
+plt.title('Crescimento Populacional de Salvador')
+plt.legend()
+plt.grid(True)
+plt.savefig('crescimento_populacional.png')
+plt.show()
